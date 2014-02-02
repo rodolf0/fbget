@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 
 from .auth import getCredentials
-from .graphapi import GraphAPI
+from .graphapi import GraphAPI, PhotoSync
 from pprint import pprint
 
 
@@ -29,7 +29,9 @@ def main():
     scopes = ','.join(['user_photos'])
     cred = getCredentials(args.secrets, args.tokens, scopes, args)
     ga = GraphAPI(cred)
-    pprint(ga.user_info())
+    pi = ga.photos()
+    ps = PhotoSync(cred, "/tmp/test", pi)
+    ps.sync_one(pi[0])
 
 
 if __name__ == '__main__':
