@@ -1,12 +1,13 @@
 Download facebook photos you're tagged in
 
+
 ### App Setup
   * Create an application at https://developers.facebook.com
 
   * In the app's settings panel **+ Add Platform**: Website
     * Set the Site-URL to `http://localhost:8080`
 
-  * Create a *secrets.json* file with your app's Oauth2 config
+  * Create a *secrets.json* file with your app's OAuth2 config
 
   ```
   {
@@ -19,3 +20,13 @@ Download facebook photos you're tagged in
     }
   }
   ```
+
+
+### Usage
+```
+python2 -m fbget \
+        --secrets mysecrets.json \
+        --tokens /tmp/tokens \
+        --outdir /tmp/test \
+        --logging_level INFO
+```
