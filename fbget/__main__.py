@@ -3,6 +3,7 @@
 from .auth import getCredentials
 from .graphapi import GraphAPI, PhotoSync
 from pprint import pprint
+import logging
 
 
 def parse_args():
@@ -21,17 +22,19 @@ def parse_args():
     # secret related options
     p.add_argument('--secrets', metavar='<secrets.json>', required=True)
     p.add_argument('--tokens', metavar='<tokens-file>', required=True)
+    p.add_argument('--outdir', required=True)
     return p.parse_args()
 
 
 def main():
     args = parse_args()
+    logging.basicConfig(level=args.logging_level)
     scopes = ','.join(['user_photos'])
     cred = getCredentials(args.secrets, args.tokens, scopes, args)
-    ga = GraphAPI(cred)
-    pi = ga.photos()
-    ps = PhotoSync(cred, "/tmp/test", pi)
-    ps.sync_one(pi[0])
+
+    gapi = GraphAPI(cred)
+    tagged = gapi.photos()
+    PhotoSync(cred, args.outdir, tagged).sync()
 
 
 if __name__ == '__main__':
