@@ -1,4 +1,6 @@
-## App Setup
+Download facebook photos you're tagged in
+
+### App Setup
   * Create an application at https://developers.facebook.com
 
   * In the app's settings panel **+ Add Platform**: Website
