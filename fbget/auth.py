@@ -15,5 +15,6 @@ def getCredentials(secrets_file, tokens_file, scopes, flags):
     storage = Storage(tokens_file)
     credentials = storage.get()
     if credentials is None or credentials.invalid:
-        run_flow(auth_flow, storage, flags, Http())
+        run_flow(auth_flow, storage, flags, http=Http())
+        return storage.get()
     return credentials

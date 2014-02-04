@@ -74,14 +74,14 @@ class PhotoSync(object):
             fs_dt = datetime.min
         # photo was changed from last sync (possibly only caption but can't tell)
         if force or fs_dt < fb_dt:
-            logging.info("Getting %s from: %s", photo.get("id"))
+            logging.info("Getting %s", photo.get("id"))
             h = self.credentials.authorize(Http())
             resp_h, resp_b = h.request(photo.get("source"))
             assert resp_h.status == 200
             with open(photodata, "w") as pd:
                 pd.write(resp_b)
         else:
-            logging.info("Skipping %s from: %s", photo.get("id"))
+            logging.info("Skipping %s", photo.get("id"))
         with open(photoinfo, "w") as pi:
             json.dump(photo, pi, indent=2)
 

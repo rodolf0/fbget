@@ -29,7 +29,7 @@ def parse_args():
 def main():
     args = parse_args()
     logging.basicConfig(level=args.logging_level)
-    scopes = ','.join(['user_photos'])
+    scopes = ','.join(['user_photos', 'friends_photos'])
     cred = getCredentials(args.secrets, args.tokens, scopes, args)
 
     gapi = GraphAPI(cred)
